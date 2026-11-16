@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fresh Mart — Supermarket Simulator</title>
+<style>
+  :root {
+    --bg: #0d1a0d;
+    --surface: #142014;
+    --accent: #4caf50;
+    --accent2: #81c784;
+    --text: #e8f5e9;
+    --text-muted: #a5d6a7;
+    --gold: #ffd54f;
+    --border: #2e4d2e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+  }
+  header {
+    background: linear-gradient(135deg, #0a1a0a 0%, #1a3a1a 60%, #0d260d 100%);
+    padding: 60px 24px 40px;
+    text-align: center;
+    border-bottom: 2px solid var(--accent);
+  }
+  header .logo {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-shadow: 0 0 40px rgba(76,175,80,0.4);
+  }
+  header .subtitle {
+    font-size: 18px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    letter-spacing: 2px;
+  }
+  header .version-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #0a1a0a;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-top: 16px;
+    letter-spacing: 1px;
+  }
+  .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+  .hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 48px 24px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 36px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    cursor: pointer;
+    border: none;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.4); }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a1a0a;
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent2);
+    border: 2px solid var(--accent);
+  }
+  section { padding: 60px 0; border-top: 1px solid var(--border); }
+  h2 {
+    font-size: 32px;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  h2::before { content: ''; display: block; width: 4px; height: 32px; background: var(--accent); border-radius: 2px; }
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+  }
+  .pillar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 28px;
+    transition: border-color 0.2s;
+  }
+  .pillar:hover { border-color: var(--accent); }
+  .pillar h3 {
+    color: var(--accent);
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  .pillar p { color: var(--text-muted); font-size: 15px; }
+  .systems-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .system-item {
+    background: var(--surface);
+    border-radius: 8px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--accent);
+    font-size: 15px;
+  }
+  .system-item.wip { border-left-color: var(--gold); }
+  .system-item.wip span { color: var(--gold); font-size: 12px; display: block; }
+  .controls-table, .req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-size: 15px;
+  }
+  .controls-table th, .req-table th {
+    background: var(--surface);
+    color: var(--accent);
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 2px solid var(--border);
+  }
+  .controls-table td, .req-table td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .controls-table td:first-child { color: var(--text); font-family: monospace; font-size: 14px; background: #0a1a0a; }
+  .steps {
+    counter-reset: steps;
+    list-style: none;
+    margin-top: 20px;
+  }
+  .steps li {
+    counter-increment: steps;
+    display: flex;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(steps);
+    min-width: 36px;
+    height: 36px;
+    background: var(--accent);
+    color: #0a1a0a;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 16px;
+    flex-shrink: 0;
+  }
+  .steps li p { color: var(--text-muted); }
+  .steps li strong { color: var(--text); display: block; margin-bottom: 4px; }
+  .download-box {
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    margin: 24px 0;
+  }
+  .download-box h3 { font-size: 24px; color: var(--accent); margin-bottom: 8px; }
+  .download-box p { color: var(--text-muted); margin-bottom: 24px; }
+  .download-box .meta { font-size: 13px; color: var(--text-muted); margin-top: 16px; }
+  footer {
+    background: #080f08;
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    border-top: 1px solid var(--border);
+  }
+  footer a { color: var(--accent2); }
+  @media (max-width: 600px) {
+    header .logo { font-size: 48px; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">FRESH MART</div>
+  <div class="subtitle">Supermarket Simulator · City Builder · Business RPG</div>
+  <div class="version-badge">v7.0 — Early Access</div>
+</header>
+
+<div class="hero-actions">
+  <a href="https://github.com/asserkdev/fresh-mart/releases/latest/download/FreshMart_v7_source.zip" class="btn btn-primary">
+    ⬇ Download Source (Windows)
+  </a>
+  <a href="https://github.com/asserkdev/fresh-mart" class="btn btn-secondary">
+    GitHub Repository
+  </a>
+</div>
+
+<div class="container">
+
+  <section>
+    <h2>What is Fresh Mart?</h2>
+    <p style="color:var(--text-muted);font-size:17px;max-width:800px;">
+      Fresh Mart is an open-world game built in Godot 4. You run a supermarket inside a living city — 
+      order stock, hire staff, set prices, build your store, serve customers, and explore eight city districts 
+      full of residents, businesses, and opportunities. It's a supermarket simulator, city builder, 
+      sandbox construction game, and RPG combined into one.
+    </p>
+    <div class="pillars" style="margin-top:36px;">
+      <div class="pillar">
+        <h3>🏪 Supermarket Simulation</h3>
+        <p>36 products, 5 suppliers, full checkout, pricing, inventory management, deliveries, store reputation, and business analytics.</p>
+      </div>
+      <div class="pillar">
+        <h3>🔨 Sandbox Construction</h3>
+        <p>Place shelves, refrigerators, checkout counters, lighting, and decorations on a grid. Changes persist when you leave and return.</p>
+      </div>
+      <div class="pillar">
+        <h3>🏙 Living City</h3>
+        <p>Eight districts — Downtown, Old Town, Residential, University, Industrial, Waterfront, Suburban — each with residents and businesses.</p>
+      </div>
+      <div class="pillar">
+        <h3>⚔ Business RPG</h3>
+        <p>Quests, character relationships, store progression, skill unlocks, and a main storyline connecting the city to your business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Implemented Systems</h2>
+    <div class="systems-grid">
+      <div class="system-item">Bootstrap &amp; GameManager</div>
+      <div class="system-item">EventBus (60+ signals)</div>
+      <div class="system-item">GameClock &amp; Seasons</div>
+      <div class="system-item">Settings (all categories)</div>
+      <div class="system-item">5-Minute Autosave</div>
+      <div class="system-item">3-Backup Crash Recovery</div>
+      <div class="system-item">Player FP + TP Camera</div>
+      <div class="system-item">Walk / Run / Sprint / Jump</div>
+      <div class="system-item">Universal Interaction</div>
+      <div class="system-item">Player Inventory</div>
+      <div class="system-item">64m Chunk Streaming</div>
+      <div class="system-item">8-District World</div>
+      <div class="system-item">Persistent Chunk State</div>
+      <div class="system-item">36 Products / 10 Categories</div>
+      <div class="system-item">5 Suppliers + Orders</div>
+      <div class="system-item">Stock &amp; Expiration</div>
+      <div class="system-item">Full Checkout Workflow</div>
+      <div class="system-item">Revenue &amp; Expenses</div>
+      <div class="system-item">Store Level Progression</div>
+      <div class="system-item">City Demand Simulation</div>
+      <div class="system-item">Seasonal Price Effects</div>
+      <div class="system-item">8 Named City Residents</div>
+      <div class="system-item">3-Tier NPC Simulation</div>
+      <div class="system-item">Customer Shopping AI</div>
+      <div class="system-item">Quest System (5 quests)</div>
+      <div class="system-item">Grid Construction System</div>
+      <div class="system-item">12 Placeable Objects</div>
+      <div class="system-item">Main Menu + Save UI</div>
+      <div class="system-item">HUD with Quest Tracker</div>
+      <div class="system-item wip">Player Animations <span>Import pending</span></div>
+      <div class="system-item wip">Management Dashboard <span>Backend done, UI pending</span></div>
+      <div class="system-item wip">Employee System <span>Backend done, UI pending</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>System Requirements</h2>
+    <table class="req-table">
+      <tr><th>Component</th><th>Minimum</th><th>Recommended</th></tr>
+      <tr><td>OS</td><td>Windows 10</td><td>Windows 10/11</td></tr>
+      <tr><td>CPU</td><td>4-core 2 GHz</td><td>6-core 3 GHz</td></tr>
+      <tr><td>RAM</td><td>4 GB</td><td>8 GB</td></tr>
+      <tr><td>GPU</td><td>Integrated (AMD/Intel)</td><td>Dedicated GPU 2GB+</td></tr>
+      <tr><td>Storage</td><td>500 MB</td><td>1 GB</td></tr>
+      <tr><td>Runtime</td><td>Godot 4.3+</td><td>Godot 4.7</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>How to Install &amp; Run</h2>
+    <ol class="steps">
+      <li>
+        <div>
+          <strong>Install Godot 4</strong>
+          <p>Download <a href="https://godotengine.org/download/windows/" style="color:var(--accent2)">Godot 4 for Windows</a> (Standard version — not Mono). Extract it anywhere.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Download the project</strong>
+          <p>Click the Download button above, or clone: <code style="color:var(--accent)">git clone https://github.com/asserkdev/fresh-mart.git</code></p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Open in Godot</strong>
+          <p>Launch Godot, click <strong>Import</strong>, navigate to the fresh-mart folder, and select <code>project.godot</code>.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <strong>Run the game</strong>
+          <p>Press <strong>F5</strong> or click the ▶ button in the top-right of the Godot editor. The main menu opens.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>Controls</h2>
+    <table class="controls-table">
+      <tr><th>Key</th><th>Action</th></tr>
+      <tr><td>W A S D</td><td>Move</td></tr>
+      <tr><td>Mouse</td><td>Look</td></tr>
+      <tr><td>Shift</td><td>Sprint</td></tr>
+      <tr><td>Space</td><td>Jump</td></tr>
+      <tr><td>E</td><td>Interact with objects/NPCs</td></tr>
+      <tr><td>V</td><td>Switch first/third person camera</td></tr>
+      <tr><td>I</td><td>Inventory</td></tr>
+      <tr><td>T</td><td>Management dashboard</td></tr>
+      <tr><td>B</td><td>Construction mode</td></tr>
+      <tr><td>F</td><td>Manual save</td></tr>
+      <tr><td>Escape</td><td>Pause menu</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Save System</h2>
+    <p style="color:var(--text-muted);">
+      The game autosaves every <strong style="color:var(--text)">5 minutes</strong> (300 seconds) when the world has changed. 
+      Three rolling backups are maintained per save slot. If a save is corrupted, the game automatically loads 
+      the most recent valid backup and notifies you. All saves work offline — no account or internet required.
+    </p>
+    <p style="color:var(--text-muted);margin-top:12px;">
+      Save files are stored at: <code style="color:var(--accent)">%APPDATA%\Godot\app_userdata\Fresh Mart\saves\</code>
+    </p>
+  </section>
+
+  <section>
+    <div class="download-box">
+      <h3>Download Fresh Mart v7</h3>
+      <p>Open-source Godot 4 project — Windows, runs in editor or as exported game.</p>
+      <a href="https://github.com/asserkdev/fresh-mart/archive/refs/heads/main.zip" class="btn btn-primary" style="display:inline-flex;">
+        ⬇ Download ZIP (Source)
+      </a>
+      <div class="meta">
+        v7.0 · M0+M1 Complete · Godot 4.7 · Windows · ~0.5 MB source
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p>Fresh Mart v7 — Built with <a href="https://godotengine.org">Godot 4</a></p>
+  <p style="margin-top:8px;"><a href="https://github.com/asserkdev/fresh-mart">GitHub</a> · <a href="https://github.com/asserkdev/fresh-mart/issues">Report Issues</a></p>
+</footer>
+
+</body>
+</html>
