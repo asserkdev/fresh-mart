@@ -1,0 +1,55 @@
+[
+    {
+        "id":  "fruit_apple",
+        "category":  "Fruits",
+        "shelf_life_days":  14,
+        "tags":  [
+                     "fresh",
+                     "organic_possible"
+                 ],
+        "quality":  4,
+        "name":  "Apple",
+        "brand":  "FarmFresh",
+        "retail_price":  0.79,
+        "wholesale_cost":  0.3,
+        "demand":  0.8,
+        "storage_requirements":  "ambient",
+        "description":  "Fresh red apple.",
+        "weight":  0.18
+    },
+    {
+        "id":  "fruit_banana",
+        "category":  "Fruits",
+        "shelf_life_days":  7,
+        "tags":  [
+                     "fresh"
+                 ],
+        "quality":  3,
+        "name":  "Banana",
+        "brand":  "TropicGold",
+        "retail_price":  0.59,
+        "wholesale_cost":  0.2,
+        "demand":  0.9,
+        "storage_requirements":  "ambient",
+        "description":  "Yellow banana.",
+        "weight":  0.12
+    },
+    {
+        "id":  "dairy_milk",
+        "category":  "Dairy",
+        "shelf_life_days":  10,
+        "tags":  [
+                     "dairy",
+                     "refrigerated"
+                 ],
+        "quality":  4,
+        "name":  "Whole Milk 1L",
+        "brand":  "DairyPure",
+        "retail_price":  1.29,
+        "wholesale_cost":  0.6,
+        "demand":  0.9,
+        "storage_requirements":  "refrigerated",
+        "description":  "Fresh whole milk.",
+        "weight":  1
+    }
+]

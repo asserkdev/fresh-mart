@@ -1,0 +1,31 @@
+# Godot generated files
+.godot/
+*.uid
+
+# Import cache
+.import/
+*.import
+
+# Build output
+build/
+*.exe
+*.pck
+*.zip
+
+# Editor-specific
+.mono/
+data_*/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# User data (save files should not be committed)
+user://
+
+# Python
+__pycache__/
+*.pyc

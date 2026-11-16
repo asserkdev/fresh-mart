@@ -1,0 +1,20 @@
+[
+  {"id":"district_downtown_0_0","district":"downtown","grid_x":0,"grid_y":0,"world_x":0,"world_z":0,"scene":""},
+  {"id":"district_downtown_1_0","district":"downtown","grid_x":1,"grid_y":0,"world_x":64,"world_z":0,"scene":""},
+  {"id":"district_downtown_0_1","district":"downtown","grid_x":0,"grid_y":1,"world_x":0,"world_z":64,"scene":""},
+  {"id":"district_downtown_1_1","district":"downtown","grid_x":1,"grid_y":1,"world_x":64,"world_z":64,"scene":""},
+  {"id":"district_old_town_5_0","district":"old_town","grid_x":5,"grid_y":0,"world_x":320,"world_z":0,"scene":""},
+  {"id":"district_old_town_6_0","district":"old_town","grid_x":6,"grid_y":0,"world_x":384,"world_z":0,"scene":""},
+  {"id":"district_residential_west_-5_0","district":"residential_west","grid_x":-5,"grid_y":0,"world_x":-320,"world_z":0,"scene":""},
+  {"id":"district_residential_west_-4_0","district":"residential_west","grid_x":-4,"grid_y":0,"world_x":-256,"world_z":0,"scene":""},
+  {"id":"district_residential_east_5_5","district":"residential_east","grid_x":5,"grid_y":5,"world_x":320,"world_z":320,"scene":""},
+  {"id":"district_residential_east_6_5","district":"residential_east","grid_x":6,"grid_y":5,"world_x":384,"world_z":320,"scene":""},
+  {"id":"district_university_0_5","district":"university","grid_x":0,"grid_y":5,"world_x":0,"world_z":320,"scene":""},
+  {"id":"district_university_1_5","district":"university","grid_x":1,"grid_y":5,"world_x":64,"world_z":320,"scene":""},
+  {"id":"district_industrial_-5_5","district":"industrial","grid_x":-5,"grid_y":5,"world_x":-320,"world_z":320,"scene":""},
+  {"id":"district_industrial_-4_5","district":"industrial","grid_x":-4,"grid_y":5,"world_x":-256,"world_z":320,"scene":""},
+  {"id":"district_waterfront_0_-5","district":"waterfront","grid_x":0,"grid_y":-5,"world_x":0,"world_z":-320,"scene":""},
+  {"id":"district_waterfront_1_-5","district":"waterfront","grid_x":1,"grid_y":-5,"world_x":64,"world_z":-320,"scene":""},
+  {"id":"district_suburban_-5_-5","district":"suburban","grid_x":-5,"grid_y":-5,"world_x":-320,"world_z":-320,"scene":""},
+  {"id":"district_suburban_-4_-5","district":"suburban","grid_x":-4,"grid_y":-5,"world_x":-256,"world_z":-320,"scene":""}
+]
