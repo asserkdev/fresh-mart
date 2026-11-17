@@ -13,6 +13,8 @@ func _ready() -> void:
 	EventBus.employee_hired.connect(_on_employee_hired)
 	EventBus.delivery_arrived.connect(_on_delivery_arrived)
 	EventBus.business_level_changed.connect(_on_business_level_changed)
+	# Auto-starts deferred so world has time to load
+	call_deferred("_check_auto_starts")
 
 func _load_quest_definitions() -> void:
 	quests = {

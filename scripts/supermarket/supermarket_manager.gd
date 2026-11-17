@@ -33,15 +33,16 @@ func _post_init() -> void:
 	check_level_up()
 
 func initialize_subsystems() -> void:
-	# These are set by child nodes in the supermarket scene
+	# These are set by child nodes that registered themselves
 	_product_manager = ServiceRegistry.get_service("ProductManager")
 	_inventory_manager = ServiceRegistry.get_service("InventoryManager")
-	_shelf_manager = ServiceRegistry.get_service("ShelfManager")
+	_pricing_manager = ServiceRegistry.get_service("PricingManager")
 	_checkout_manager = ServiceRegistry.get_service("CheckoutManager")
-	_customer_manager = ServiceRegistry.get_service("CustomerManager")
 	_supplier_manager = ServiceRegistry.get_service("SupplierManager")
 	_employee_manager = ServiceRegistry.get_service("EmployeeManager")
-	_pricing_manager = ServiceRegistry.get_service("PricingManager")
+	# Optional systems (may not be loaded yet)
+	_shelf_manager = ServiceRegistry.get_service("ShelfManager") if ServiceRegistry.has_service("ShelfManager") else null
+	_customer_manager = ServiceRegistry.get_service("CustomerManager") if ServiceRegistry.has_service("CustomerManager") else null
 
 func _on_product_sold(product_id: String, quantity: int, revenue: float) -> void:
 	total_revenue += revenue

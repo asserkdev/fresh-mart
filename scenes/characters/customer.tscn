@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://customer"]
+[gd_scene load_steps=3 format=3 uid="uid://customer"]
 
 [ext_resource type="Script" path="res://scripts/characters/customer_ai.gd" id="1_customer"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.3
+height = 1.8
 
 [node name="Customer" type="CharacterBody3D"]
 script = ExtResource("1_customer")
@@ -8,8 +12,8 @@ collision_layer = 4
 collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = CapsuleShape3D( radius=0.3, height=1.8 )
 position = Vector3(0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
 
 [node name="MeshRoot" type="Node3D" parent="."]
 

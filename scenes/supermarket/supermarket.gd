@@ -3,7 +3,7 @@ extends Node3D
 
 @onready var placement_system: Node3D = $PlacementSystem
 @onready var customer_spawner: Node3D = $CustomerSpawner
-@onready var navigation_region: NavigationRegion3D = $NavigationRegion3D
+var navigation_region: NavigationRegion3D = null
 
 var customer_scene: PackedScene = null
 var _customer_timer: float = 0.0

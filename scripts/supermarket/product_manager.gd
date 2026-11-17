@@ -18,7 +18,7 @@ func _load_product_catalogue() -> void:
 				for p in list:
 					products[p["id"]] = p
 			file.close()
-	if products.is_empty():
+	if products.size() < 10:
 		_load_default_products()
 	print("[ProductManager] Loaded %d products" % products.size())
 

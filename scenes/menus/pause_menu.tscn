@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://pausemenu"]
+
+[ext_resource type="Script" path="res://scenes/menus/pause_menu.gd" id="1_pause"]
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+visible = false
+script = ExtResource("1_pause")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 760.0
+offset_top = 240.0
+offset_right = 1160.0
+offset_bottom = 720.0
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 20.0
+offset_right = 400.0
+offset_bottom = 70.0
+text = "PAUSED"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 36
+
+[node name="VBox" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 90.0
+offset_right = 340.0
+offset_bottom = 450.0
+theme_override_constants/separation = 14
+
+[node name="BtnResume" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 52)
+text = "Resume"
+theme_override_font_sizes/font_size = 20
+
+[node name="BtnSave" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 52)
+text = "Save Game"
+theme_override_font_sizes/font_size = 20
+
+[node name="BtnSettings" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 52)
+text = "Settings"
+theme_override_font_sizes/font_size = 20
+
+[node name="BtnMainMenu" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 52)
+text = "Main Menu"
+theme_override_font_sizes/font_size = 20
+
+[node name="BtnQuit" type="Button" parent="Panel/VBox"]
+custom_minimum_size = Vector2(280, 52)
+text = "Quit to Desktop"
+theme_override_font_sizes/font_size = 20
+
+[node name="SaveStatus" type="Label" parent="Panel/VBox"]
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+modulate = Color(0.6, 0.9, 0.6, 1)

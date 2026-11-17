@@ -38,6 +38,9 @@ func setup(id: String, data: Dictionary) -> void:
 	schedule = data.get("schedule", "")
 	needs = data.get("needs", {"hunger": 0.5, "rest": 0.8})
 	preferences = data.get("preferences", {})
+	# Build visible mesh
+	if mesh_root:
+		CharacterMeshBuilder.build_character(mesh_root, "npc")
 
 func set_simulation_level(level: int) -> void:
 	sim_level = level as SimLevel

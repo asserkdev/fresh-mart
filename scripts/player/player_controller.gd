@@ -37,6 +37,9 @@ func _ready() -> void:
 	_set_camera_mode("first_person")
 	ServiceRegistry.register("Player", self)
 	_mouse_sensitivity = SettingsManager.get_setting("mouse_sensitivity")
+	# Build character mesh
+	if mesh_root:
+		CharacterMeshBuilder.build_character(mesh_root, "default")
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:

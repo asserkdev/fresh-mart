@@ -22,7 +22,7 @@ func _ready() -> void:
 	_load_chunk_manifest()
 
 func _process(_delta: float) -> void:
-	var player = ServiceRegistry.get_service("Player")
+	var player = ServiceRegistry.get_service("Player") if ServiceRegistry.has_service("Player") else null
 	if player == null:
 		return
 	_update_chunks(player.global_position)

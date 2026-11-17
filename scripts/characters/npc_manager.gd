@@ -34,7 +34,7 @@ func _load_npc_definitions() -> void:
 		npc_data[r["id"]]["needs"] = {"hunger": 0.5, "rest": 0.8}
 
 func _process(delta: float) -> void:
-	var player = ServiceRegistry.get_service("Player")
+	var player = ServiceRegistry.get_service("Player") if ServiceRegistry.has_service("Player") else null
 	if player == null:
 		return
 	for npc_id in active_npcs:

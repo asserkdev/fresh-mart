@@ -1,0 +1,48 @@
+[gd_scene load_steps=2 format=3 uid="uid://mgmtdash"]
+
+[ext_resource type="Script" path="res://ui/screens/management_dashboard.gd" id="1_dash"]
+
+[node name="ManagementDashboard" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_dash")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 80.0
+offset_top = 60.0
+offset_right = 1840.0
+offset_bottom = 1020.0
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 500.0
+offset_bottom = 54.0
+text = "Management Dashboard"
+theme_override_font_sizes/font_size = 28
+
+[node name="CloseBtn" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1680.0
+offset_top = 10.0
+offset_right = 1760.0
+offset_bottom = 54.0
+text = "Close [T]"
+
+[node name="TabContainer" type="TabContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 1750.0
+offset_bottom = 950.0

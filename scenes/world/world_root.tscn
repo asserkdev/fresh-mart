@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://worldroot"]
+[gd_scene load_steps=17 format=3 uid="uid://worldroot"]
 
 [ext_resource type="Script" path="res://scenes/world/world_root.gd" id="1_worldroot"]
 [ext_resource type="Script" path="res://scripts/world/chunk_manager.gd" id="2_chunkmgr"]
@@ -9,14 +9,17 @@
 [ext_resource type="Script" path="res://scripts/supermarket/pricing_manager.gd" id="7_pricemgr"]
 [ext_resource type="Script" path="res://scripts/supermarket/supplier_manager.gd" id="8_supplmgr"]
 [ext_resource type="Script" path="res://scripts/supermarket/checkout_manager.gd" id="9_checkmgr"]
-[ext_resource type="Script" path="res://scripts/rpg/quest_manager.gd" id="10_questmgr"]
-[ext_resource type="PackedScene" path="res://scenes/world/hud.tscn" id="11_hud"]
-[ext_resource type="Script" path="res://scripts/simulation/economy/economy_manager.gd" id="12_econmgr"]
-[ext_resource type="Script" path="res://scripts/construction/construction_catalog.gd" id="13_catalog"]
-[ext_resource type="Script" path="res://scripts/construction/placement_system.gd" id="14_placement"]
+[ext_resource type="Script" path="res://scripts/supermarket/employee_manager.gd" id="10_empmgr"]
+[ext_resource type="Script" path="res://scripts/rpg/quest_manager.gd" id="11_questmgr"]
+[ext_resource type="PackedScene" path="res://scenes/world/hud.tscn" id="12_hud"]
+[ext_resource type="Script" path="res://scripts/simulation/economy/economy_manager.gd" id="13_econmgr"]
+[ext_resource type="Script" path="res://scripts/construction/construction_catalog.gd" id="14_catalog"]
+[ext_resource type="Script" path="res://scripts/construction/placement_system.gd" id="15_placement"]
+[ext_resource type="Script" path="res://scripts/simulation/weather/weather_system.gd" id="16_weather"]
+[ext_resource type="PackedScene" path="res://scenes/menus/pause_menu.tscn" id="17_pause"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
-sky_top_color = Color(0.2, 0.4, 0.7, 1)
+sky_top_color = Color(0.2, 0.4, 0.75, 1)
 sky_horizon_color = Color(0.6, 0.75, 0.85, 1)
 ground_bottom_color = Color(0.1, 0.15, 0.1, 1)
 ground_horizon_color = Color(0.4, 0.5, 0.35, 1)
@@ -29,11 +32,13 @@ background_mode = 2
 sky = SubResource("Sky_1")
 ambient_light_source = 3
 ambient_light_color = Color(0.4, 0.5, 0.45, 1)
-ambient_light_energy = 0.4
+ambient_light_energy = 0.5
 fog_enabled = true
 fog_density = 0.003
 volumetric_fog_enabled = false
-glow_enabled = false
+glow_enabled = true
+glow_intensity = 0.3
+glow_bloom = 0.1
 
 [node name="WorldRoot" type="Node3D"]
 script = ExtResource("1_worldroot")
@@ -42,15 +47,17 @@ script = ExtResource("1_worldroot")
 environment = SubResource("Environment_1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.7, 0.7, 0, -0.7, 0.7, 0, 100, 0)
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 100, 0)
 light_color = Color(1.0, 0.95, 0.85, 1)
 light_energy = 1.0
 shadow_enabled = true
 directional_shadow_mode = 0
 directional_shadow_max_distance = 200.0
+directional_shadow_split_1 = 0.1
+directional_shadow_split_2 = 0.3
 
 [node name="PlayerSpawn" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 1, 28)
 
 [node name="ChunkManager" type="Node" parent="."]
 script = ExtResource("2_chunkmgr")
@@ -76,23 +83,24 @@ script = ExtResource("8_supplmgr")
 [node name="CheckoutManager" type="Node" parent="SupermarketManager"]
 script = ExtResource("9_checkmgr")
 
+[node name="EmployeeManager" type="Node" parent="SupermarketManager"]
+script = ExtResource("10_empmgr")
+
 [node name="QuestManager" type="Node" parent="."]
-script = ExtResource("10_questmgr")
+script = ExtResource("11_questmgr")
 
 [node name="EconomyManager" type="Node" parent="."]
-script = ExtResource("12_econmgr")
+script = ExtResource("13_econmgr")
 
 [node name="ConstructionCatalog" type="Node" parent="."]
-script = ExtResource("13_catalog")
+script = ExtResource("14_catalog")
 
 [node name="PlacementSystem" type="Node3D" parent="."]
-script = ExtResource("14_placement")
+script = ExtResource("15_placement")
 
-[node name="HUD" parent="." instance=ExtResource("11_hud")]
+[node name="WeatherSystem" type="Node" parent="."]
+script = ExtResource("16_weather")
 
-[node name="PauseMenu" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-visible = false
+[node name="HUD" parent="." instance=ExtResource("12_hud")]
+
+[node name="PauseMenu" parent="." instance=ExtResource("17_pause")]

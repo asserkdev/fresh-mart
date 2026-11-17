@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://downtown_chunk"]
+
+[ext_resource type="Script" path="res://scenes/world/city/downtown_chunk.gd" id="1_downtown"]
+
+[node name="DowntownChunk" type="Node3D"]
+script = ExtResource("1_downtown")

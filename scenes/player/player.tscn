@@ -1,6 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://player"]
+[gd_scene load_steps=3 format=3 uid="uid://player"]
 
 [ext_resource type="Script" path="res://scripts/player/player_controller.gd" id="1_player"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1"]
+radius = 0.4
+height = 1.8
 
 [node name="Player" type="CharacterBody3D"]
 script = ExtResource("1_player")
@@ -8,8 +12,8 @@ collision_layer = 2
 collision_mask = 1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = CapsuleShape3D( radius=0.4, height=1.8 )
 position = Vector3(0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_1")
 
 [node name="MeshRoot" type="Node3D" parent="."]
 visible = false
@@ -24,8 +28,9 @@ near = 0.05
 far = 300.0
 
 [node name="InteractionRay" type="RayCast3D" parent="FPCameraPivot"]
+enabled = true
 target_position = Vector3(0, 0, -2.5)
-collision_mask = 65  
+collision_mask = 65
 
 [node name="TPCameraPivot" type="Node3D" parent="."]
 position = Vector3(0, 1.4, 0)

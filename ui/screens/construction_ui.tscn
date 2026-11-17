@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3 uid="uid://constructionui"]
+
+[ext_resource type="Script" path="res://ui/screens/construction_ui.gd" id="1_conui"]
+
+[node name="ConstructionUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_conui")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="BalanceLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 400.0
+offset_bottom = 44.0
+text = "Balance: $0"
+theme_override_font_sizes/font_size = 20
+
+[node name="HSplit" type="HSplitContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 0.0
+offset_top = 50.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="LeftPanel" type="VBoxContainer" parent="Panel/HSplit"]
+custom_minimum_size = Vector2(300, 0)
+
+[node name="CatLabel" type="Label" parent="Panel/HSplit/LeftPanel"]
+text = "Categories"
+theme_override_font_sizes/font_size = 18
+
+[node name="CategoryList" type="ItemList" parent="Panel/HSplit/LeftPanel"]
+custom_minimum_size = Vector2(0, 200)
+
+[node name="ObjLabel" type="Label" parent="Panel/HSplit/LeftPanel"]
+text = "Objects"
+theme_override_font_sizes/font_size = 18
+
+[node name="ObjectList" type="ItemList" parent="Panel/HSplit/LeftPanel"]
+size_flags_vertical = 3
+
+[node name="RightPanel" type="VBoxContainer" parent="Panel/HSplit"]
+size_flags_horizontal = 3
+
+[node name="PreviewLabel" type="Label" parent="Panel/HSplit/RightPanel"]
+text = "Select an object"
+theme_override_font_sizes/font_size = 24
+
+[node name="CostLabel" type="Label" parent="Panel/HSplit/RightPanel"]
+text = ""
+theme_override_font_sizes/font_size = 20
+
+[node name="DescLabel" type="Label" parent="Panel/HSplit/RightPanel"]
+text = ""
+autowrap_mode = 3
+
+[node name="BtnPlace" type="Button" parent="Panel/HSplit/RightPanel"]
+custom_minimum_size = Vector2(200, 50)
+text = "Place (Click)"
+disabled = true
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnRotate" type="Button" parent="Panel/HSplit/RightPanel"]
+custom_minimum_size = Vector2(200, 50)
+text = "Rotate [R]"
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnRemove" type="Button" parent="Panel/HSplit/RightPanel"]
+custom_minimum_size = Vector2(200, 50)
+text = "Remove Mode"
+theme_override_font_sizes/font_size = 18
+
+[node name="BtnCancel" type="Button" parent="Panel/HSplit/RightPanel"]
+custom_minimum_size = Vector2(200, 50)
+text = "Exit Construction [B]"
+theme_override_font_sizes/font_size = 18
