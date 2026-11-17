@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://mainmenu"]
+[gd_scene load_steps=5 format=3 uid="uid://mainmenu"]
 
 [ext_resource type="Script" path="res://scenes/menus/main_menu.gd" id="1_mainmenu"]
+[ext_resource type="Shader" path="res://assets/shaders/menu_bg.gdshader" id="2_shader"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1"]
+shader = ExtResource("2_shader")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_panel"]
+bg_color = Color(0.04, 0.12, 0.04, 0.75)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.2, 0.6, 0.2, 0.5)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -9,84 +25,173 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource("1_mainmenu")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-color = Color(0.07, 0.09, 0.07, 1)
 
-[node name="TitleLabel" type="Label" parent="."]
+[node name="BGRect" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.03, 0.10, 0.03, 1)
+material = SubResource("ShaderMaterial_1")
+
+[node name="ParticlesLayer" type="Control" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="TitleContainer" type="VBoxContainer" parent="Background"]
 layout_mode = 0
 offset_left = 0.0
 offset_top = 60.0
 offset_right = 1920.0
-offset_bottom = 160.0
+offset_bottom = 260.0
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="Background/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
 text = "FRESH MART"
 horizontal_alignment = 1
-vertical_alignment = 1
-theme_override_font_sizes/font_size = 72
+theme_override_font_sizes/font_size = 92
+theme_override_colors/font_color = Color(0.4, 0.95, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0.1, 0.5, 0.1, 0.8)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/shadow_outline_size = 8
 
-[node name="SubtitleLabel" type="Label" parent="."]
+[node name="SubtitleLabel" type="Label" parent="Background/TitleContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Supermarket Simulator  ·  City Builder  ·  Business RPG"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+theme_override_colors/font_color = Color(0.55, 0.85, 0.55, 1)
+
+[node name="GlowDivider" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_left = 560.0
+offset_top = 268.0
+offset_right = 1360.0
+offset_bottom = 271.0
+color = Color(0.2, 0.75, 0.2, 0.4)
+
+[node name="MenuPanel" type="PanelContainer" parent="Background"]
+layout_mode = 0
+offset_left = 710.0
+offset_top = 290.0
+offset_right = 1210.0
+offset_bottom = 760.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_panel")
+
+[node name="VBox" type="VBoxContainer" parent="Background/MenuPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 490.0
+offset_bottom = 460.0
+
+[node name="BtnNewGame" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 58)
+text = "▶   New Game"
+theme_override_font_sizes/font_size = 24
+theme_override_colors/font_color = Color(0.3, 1.0, 0.3, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="BtnContinue" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "↺   Continue"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.6, 0.95, 0.6, 1)
+
+[node name="BtnLoad" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "📂  Load Game"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.6, 0.95, 0.6, 1)
+
+[node name="BtnSandbox" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "🔨  Sandbox"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.6, 0.95, 0.6, 1)
+
+[node name="BtnSettings" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "⚙   Settings"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.5, 0.85, 0.5, 1)
+
+[node name="BtnCredits" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "★   Credits"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.5, 0.85, 0.5, 1)
+
+[node name="BtnExit" type="Button" parent="Background/MenuPanel/VBox"]
+custom_minimum_size = Vector2(460, 52)
+text = "✕   Exit"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.7, 0.4, 0.4, 1)
+
+[node name="StatsBar" type="HBoxContainer" parent="Background"]
 layout_mode = 0
 offset_left = 0.0
-offset_top = 150.0
+offset_top = 790.0
 offset_right = 1920.0
-offset_bottom = 200.0
-text = "Supermarket Simulator · City Builder · RPG"
-horizontal_alignment = 1
-theme_override_font_sizes/font_size = 22
-modulate = Color(0.8, 0.9, 0.7, 1)
+offset_bottom = 840.0
+alignment = 1
+theme_override_constants/separation = 48
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 760.0
-offset_top = 240.0
-offset_right = 1160.0
-offset_bottom = 640.0
-theme_override_constants/separation = 12
-
-[node name="BtnNewGame" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "New Game"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnContinue" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Continue"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnLoad" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Load Game"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnSandbox" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Sandbox"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnSettings" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Settings"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnCredits" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Credits"
-theme_override_font_sizes/font_size = 22
-
-[node name="BtnExit" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(400, 56)
-text = "Exit"
-theme_override_font_sizes/font_size = 22
-
-[node name="VersionLabel" type="Label" parent="."]
-layout_mode = 0
-offset_left = 20.0
-offset_top = 1040.0
-offset_right = 400.0
-offset_bottom = 1070.0
-text = "Fresh Mart v7.0"
+[node name="Stat1" type="Label" parent="Background/StatsBar"]
+text = "36 Products"
 theme_override_font_sizes/font_size = 16
-modulate = Color(0.6, 0.6, 0.6, 1)
+theme_override_colors/font_color = Color(0.4, 0.75, 0.4, 0.8)
+
+[node name="Stat2" type="Label" parent="Background/StatsBar"]
+text = "5 Suppliers"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.75, 0.4, 0.8)
+
+[node name="Stat3" type="Label" parent="Background/StatsBar"]
+text = "8 City Districts"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.75, 0.4, 0.8)
+
+[node name="Stat4" type="Label" parent="Background/StatsBar"]
+text = "5 Quests"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.75, 0.4, 0.8)
+
+[node name="Stat5" type="Label" parent="Background/StatsBar"]
+text = "Weather System"
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.4, 0.75, 0.4, 0.8)
+
+[node name="TipLabel" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 870.0
+offset_right = 1820.0
+offset_bottom = 910.0
+text = ""
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.5, 0.8, 0.5, 0.75)
+
+[node name="VersionLabel" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 1044.0
+offset_right = 400.0
+offset_bottom = 1074.0
+text = "v7.0"
+theme_override_font_sizes/font_size = 15
+theme_override_colors/font_color = Color(0.3, 0.55, 0.3, 0.7)
