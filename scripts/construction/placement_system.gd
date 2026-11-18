@@ -17,7 +17,8 @@ var _placed_objects: Dictionary = {}   # unique_id -> {id, position, rotation, n
 @export var preview_invalid_color: Color = Color(1.0, 0.3, 0.3, 0.5)
 
 func _ready() -> void:
-	ServiceRegistry.register("PlacementSystem", self)
+	if not ServiceRegistry.has_service("PlacementSystem"):
+		ServiceRegistry.register("PlacementSystem", self)
 	set_process(false)
 
 func enter_construction_mode() -> void:

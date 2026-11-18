@@ -167,7 +167,6 @@ static func _make_skin_mat(color: Color) -> StandardMaterial3D:
 	mat.albedo_color = color
 	mat.roughness = 0.65
 	mat.metallic = 0.0
-	mat.subsurface_scattering_strength = 0.2
 	return mat
 
 static func _make_fabric_mat(color: Color) -> StandardMaterial3D:

@@ -140,23 +140,31 @@ func _build_entrance() -> void:
 
 func _build_shelving_rows() -> void:
 	# 4 rows of shelves, 3 shelves each
-	var row_positions = [4.0, 7.5, 11.0, 14.5]
-	var shelf_colors = [
-		Color(0.85, 0.5, 0.2),   # produce - warm orange
-		Color(0.3, 0.6, 0.9),    # dairy - blue
-		Color(0.9, 0.3, 0.3),    # meat - red
-		Color(0.7, 0.7, 0.7),    # general - grey
+	var row_configs = [
+		{"x": 4.0, "color": Color(1.0, 0.3, 0.1), "products": ["fruit_apple","fruit_banana","veg_carrot","veg_tomato"], "category": "Fruits"},
+		{"x": 7.5, "color": Color(0.3, 0.6, 0.9),  "products": ["dairy_milk","dairy_cheese","dairy_butter","dairy_yogurt"], "category": "Dairy"},
+		{"x": 11.0,"color": Color(0.9, 0.3, 0.3),  "products": ["meat_chicken","meat_beef","snack_chips","snack_chocolate"], "category": "Meat"},
+		{"x": 14.5,"color": Color(0.7, 0.7, 0.7),  "products": ["drink_water","drink_cola","canned_tuna","household_soap"], "category": "general"},
 	]
-	for row_idx in range(row_positions.size()):
-		var row_x = row_positions[row_idx]
+	for row_idx in range(row_configs.size()):
+		var cfg = row_configs[row_idx]
 		for shelf_idx in range(3):
 			var z = 4.0 + shelf_idx * 7.0
-			_build_shelf_unit(Vector3(row_x, 0, z), shelf_colors[row_idx])
+			var product_id = cfg["products"][shelf_idx % cfg["products"].size()]
+			_build_shelf_unit(Vector3(cfg["x"], 0, z), cfg["color"], row_idx * 3 + shelf_idx, product_id)
 
-func _build_shelf_unit(pos: Vector3, product_color: Color) -> void:
+func _build_shelf_unit(pos: Vector3, product_color: Color, shelf_index: int = 0, assigned_product: String = "") -> void:
 	var shelf_root = Node3D.new()
-	shelf_root.name = "Shelf_%s" % str(pos).replace(" ", "_")
+	shelf_root.name = "Shelf_%02d" % shelf_index
 	shelf_root.position = pos
+
+	# Attach interactable script
+	var interactable_script = load("res://scenes/supermarket/shelf_interactable.gd")
+	if interactable_script:
+		shelf_root.set_script(interactable_script)
+		shelf_root.set("shelf_id", "supermarket_shelf_%02d" % shelf_index)
+		shelf_root.set("shelf_capacity", 20)
+		shelf_root.set("assigned_product_id", assigned_product)
 
 	var metal_mat = StandardMaterial3D.new()
 	metal_mat.albedo_color = Color(0.72, 0.72, 0.74)

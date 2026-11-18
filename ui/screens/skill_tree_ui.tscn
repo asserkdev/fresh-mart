@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3 uid="uid://skilltree"]
+
+[ext_resource type="Script" path="res://ui/screens/skill_tree_ui.gd" id="1_skill"]
+
+[node name="SkillTreeUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1_skill")
+
+[node name="Overlay" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.6)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 60.0
+offset_right = 1620.0
+offset_bottom = 1020.0
+
+[node name="Title" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 800.0
+offset_bottom = 50.0
+text = "Skill Tree"
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(0.4, 0.9, 0.4, 1)
+
+[node name="PointsLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 820.0
+offset_top = 14.0
+offset_right = 1050.0
+offset_bottom = 50.0
+text = "Skill Points: 0"
+theme_override_font_sizes/font_size = 18
+
+[node name="XPLabel" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = 1060.0
+offset_top = 14.0
+offset_right = 1250.0
+offset_bottom = 50.0
+text = "Total XP: 0"
+theme_override_font_sizes/font_size = 18
+
+[node name="CloseBtn" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 1230.0
+offset_top = 920.0
+offset_right = 1310.0
+offset_bottom = 955.0
+text = "Close"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 60.0
+offset_right = 1310.0
+offset_bottom = 910.0
+
+[node name="TreeContainer" type="VBoxContainer" parent="Panel/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 8

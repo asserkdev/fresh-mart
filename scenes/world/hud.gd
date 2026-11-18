@@ -74,6 +74,20 @@ func _unhandled_input(event: InputEvent) -> void:
 		_toggle_construction()
 	elif event.is_action_pressed("toggle_inventory"):
 		_toggle_inventory()
+	elif event.is_action_pressed("ui_cancel"):
+		# Close any open UI panel
+		if _management_ui and is_instance_valid(_management_ui):
+			_management_ui.queue_free()
+			_management_ui = null
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		elif _construction_ui and is_instance_valid(_construction_ui):
+			_construction_ui.queue_free()
+			_construction_ui = null
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		elif _inventory_ui and is_instance_valid(_inventory_ui):
+			_inventory_ui.queue_free()
+			_inventory_ui = null
+			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 
 func _toggle_management() -> void:
 	if _management_ui and is_instance_valid(_management_ui):

@@ -62,9 +62,9 @@ func _spawn_player() -> void:
 	# Spawn inside supermarket entrance
 	var spawn_pos = player_spawn.global_position if player_spawn else Vector3(12, 1, 30)
 	_player.global_position = spawn_pos
-	ServiceRegistry.register("Player", _player)
+	# Player registers itself in its own _ready(); world_root just stores the reference
+	await get_tree().process_frame  # let player _ready() run
 	print("[WorldRoot] Player spawned at: %s" % str(_player.global_position))
-
 func _spawn_supermarket() -> void:
 	var sm_scene = load("res://scenes/supermarket/supermarket.tscn")
 	if sm_scene == null:

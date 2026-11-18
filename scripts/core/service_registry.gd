@@ -6,7 +6,9 @@ var _services: Dictionary = {}
 
 func register(name: String, service: Object) -> void:
 	if _services.has(name):
-		push_warning("[ServiceRegistry] Overwriting service: " + name)
+		# Silent overwrite for re-registration during scene reloads — only warn on truly different objects
+		if _services[name] != service:
+			push_warning("[ServiceRegistry] Overwriting service: " + name)
 	_services[name] = service
 	print("[ServiceRegistry] Registered: " + name)
 

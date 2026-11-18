@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://worldroot"]
+[gd_scene load_steps=21 format=3 uid="uid://worldroot"]
 
 [ext_resource type="Script" path="res://scenes/world/world_root.gd" id="1_worldroot"]
 [ext_resource type="Script" path="res://scripts/world/chunk_manager.gd" id="2_chunkmgr"]
@@ -10,7 +10,10 @@
 [ext_resource type="Script" path="res://scripts/supermarket/supplier_manager.gd" id="8_supplmgr"]
 [ext_resource type="Script" path="res://scripts/supermarket/checkout_manager.gd" id="9_checkmgr"]
 [ext_resource type="Script" path="res://scripts/supermarket/employee_manager.gd" id="10_empmgr"]
+[ext_resource type="Script" path="res://scripts/supermarket/shelf_manager.gd" id="10b_shelfmgr"]
+[ext_resource type="Script" path="res://scripts/supermarket/customer_manager.gd" id="10c_custmgr"]
 [ext_resource type="Script" path="res://scripts/rpg/quest_manager.gd" id="11_questmgr"]
+[ext_resource type="Script" path="res://scripts/rpg/skill_manager.gd" id="11b_skillmgr"]
 [ext_resource type="PackedScene" path="res://scenes/world/hud.tscn" id="12_hud"]
 [ext_resource type="Script" path="res://scripts/simulation/economy/economy_manager.gd" id="13_econmgr"]
 [ext_resource type="Script" path="res://scripts/construction/construction_catalog.gd" id="14_catalog"]
@@ -86,8 +89,17 @@ script = ExtResource("9_checkmgr")
 [node name="EmployeeManager" type="Node" parent="SupermarketManager"]
 script = ExtResource("10_empmgr")
 
+[node name="ShelfManager" type="Node" parent="SupermarketManager"]
+script = ExtResource("10b_shelfmgr")
+
+[node name="CustomerManager" type="Node" parent="."]
+script = ExtResource("10c_custmgr")
+
 [node name="QuestManager" type="Node" parent="."]
 script = ExtResource("11_questmgr")
+
+[node name="SkillManager" type="Node" parent="."]
+script = ExtResource("11b_skillmgr")
 
 [node name="EconomyManager" type="Node" parent="."]
 script = ExtResource("13_econmgr")
