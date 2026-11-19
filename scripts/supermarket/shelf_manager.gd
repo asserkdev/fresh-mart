@@ -1,8 +1,6 @@
 extends Node
 ## ShelfManager — tracks shelf placements, stocking state, and product display.
 
-class_name ShelfManagerNode
-
 var shelves: Dictionary = {}  # shelf_id -> ShelfData
 
 func _ready() -> void:

@@ -28,7 +28,7 @@ const DEFAULTS: Dictionary = {
 	"ambient_volume": 0.8,
 	"ui_volume": 0.9,
 	# Gameplay
-	"mouse_sensitivity": 0.3,
+	"mouse_sensitivity": 0.5,    # 0.05-1.0 slider, maps to 0.0005-0.004 rad/px
 	"camera_fov": 75.0,
 	"camera_bob": true,
 	"autosave_interval": 300,   # 5 real minutes
